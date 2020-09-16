@@ -1,2 +1,2 @@
-# javamath2kmp
- A Kotlin Multiplatform port of java.math functions not currently included in the standard library
+# JavaMath2KMP
+ A Kotlin Multiplatform port of Java math functions not included in the standard library, including `floorDiv`, `floorMod`, and checked arithmetic operations.

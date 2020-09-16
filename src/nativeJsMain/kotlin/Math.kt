@@ -6,25 +6,23 @@ actual infix fun Long.floorMod(other: Int): Int = (this floorMod other.toLong())
 
 actual infix fun Long.floorDiv(other: Long): Long {
     val result = this / other
-    // if the signs are different and modulo not zero, round down
+
     return if (this xor other < 0 && result * other != this) {
         result - 1
     } else {
         result
     }
 }
-//= if (this >= 0) this / other else (this + 1) / other - 1
 
 actual infix fun Int.floorDiv(other: Int): Int {
     val result = this / other
-    // if the signs are different and modulo not zero, round down
+
     return if (this xor other < 0 && result * other != this) {
         result - 1
     } else {
         result
     }
 }
-//= if (this >= 0) this / other else (this + 1) / other - 1
 
 actual infix fun Long.floorDiv(other: Int): Long = this floorDiv other.toLong()
 
