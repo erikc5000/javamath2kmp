@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="3" platform="Native (mingw_x64) " allPlatforms="Native []/Native [mingw_x64]" useProjectSettings="false" isTestModule="true" externalProjectId="javamath2kmp" isHmppProject="true" pureKotlinSourceFolders="C:\Users\erikc\Development\javamath2kmp\src\commonMain\kotlin">
+        <dependsOnModuleNames>javamath2kmp:commonTest</dependsOnModuleNames>
+        <sourceSets>
+          <sourceSet>javamath2kmp.nativeJsMain</sourceSet>
+          <sourceSet>javamath2kmp.commonMain</sourceSet>
+          <sourceSet>javamath2kmp.commonTest</sourceSet>
+        </sourceSets>
+        <newMppModelJpsModuleKind>COMPILATION_AND_SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
+        <externalSystemTestTasks>
+          <externalSystemTestTask>nativeJsTest|javamath2kmp:nativeJsTest|nativeJs</externalSystemTestTask>
+        </externalSystemTestTasks>
+        <compilerSettings />
+        <compilerArguments>
+          <option name="languageVersion" value="1.4" />
+          <option name="apiVersion" value="1.4" />
+          <option name="progressiveMode" value="true" />
+          <option name="pluginOptions">
+            <array />
+          </option>
+          <option name="pluginClasspaths">
+            <array />
+          </option>
+          <option name="multiPlatform" value="true" />
+          <option name="errors">
+            <ArgumentParseErrors />
+          </option>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+</module>
