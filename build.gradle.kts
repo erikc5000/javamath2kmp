@@ -88,13 +88,15 @@ kotlin {
     }
 }
 
-val isReleaseBuild get() = !version.toString().endsWith("SNAPSHOT")
-
 val javadocJar by tasks.registering(Jar::class) {
-    val dokkaHtml = tasks.named<DokkaTask>("dokkaHtml")
-    dependsOn(dokkaHtml)
+    val dokkaJavadoc = tasks.named<DokkaTask>("dokkaJavadoc")
+    dependsOn(dokkaJavadoc)
     archiveClassifier.set("javadoc")
-    from(dokkaHtml.get().outputDirectory)
+    from(dokkaJavadoc.get().outputDirectory)
+}
+
+val emptySourcesJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("sources")
 }
 
 signing {
@@ -103,6 +105,8 @@ signing {
     useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications)
 }
+
+val isReleaseBuild get() = !version.toString().endsWith("SNAPSHOT")
 
 tasks.withType<Sign>().configureEach {
     onlyIf { isReleaseBuild }
@@ -130,43 +134,30 @@ publishing {
     publications.withType<MavenPublication>().configureEach {
         artifact(javadocJar.get())
 
-        val pomName: String by project
-        val pomDescription: String by project
-        val pomScmUrl: String? by project
-        val pomUrl: String? by project
-        val pomScmConnection: String? by project
-        val pomLicenseName: String? by project
-        val pomLicenseUrl: String? by project
-        val pomLicenseDist: String? by project
-        val pomDeveloperId: String? by project
-        val pomDeveloperName: String? by project
-        val pomArtifactId: String? by project
-
-        if (pomArtifactId != null) {
-            artifactId = pomArtifactId
+        if (name == "kotlinMultiplatform") {
+            artifact(emptySourcesJar.get())
         }
 
         pom {
-            name.set(pomName)
-            description.set(pomDescription)
-            url.set(pomUrl)
+            name.set("JavaMath2KMP")
+            description.set("A Kotlin Multiplatform port of Java math functions not included in the standard library")
+            url.set("https://github.com/erikc5000/javamath2kmp")
             licenses {
                 license {
-                    name.set(pomLicenseName)
-                    url.set(pomLicenseUrl)
-                    distribution.set(pomLicenseDist)
+                    name.set("The Apache License, Version 2.0")
+                    url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    distribution.set("repo")
                 }
             }
             developers {
                 developer {
-                    id.set(pomDeveloperId)
-                    name.set(pomDeveloperName)
-
+                    id.set("erikc5000")
+                    name.set("Erik Christensen")
                 }
             }
             scm {
-                connection.set(pomScmConnection)
-                url.set(pomScmUrl)
+                connection.set("scm:git:https://github.com/erikc5000/javamath2kmp.git")
+                url.set("https://github.com/erikc5000/javamath2kmp")
             }
         }
     }
