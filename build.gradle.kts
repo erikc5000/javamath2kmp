@@ -5,7 +5,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
     kotlin("multiplatform") version "1.4.30"
-    id("org.jetbrains.dokka") version "1.4.10"
+    id("org.jetbrains.dokka") version "1.4.20"
     `maven-publish`
     signing
 }
@@ -89,7 +89,7 @@ kotlin {
 }
 
 val javadocJar by tasks.registering(Jar::class) {
-    val dokkaJavadoc = tasks.named<DokkaTask>("dokkaJavadoc")
+    val dokkaJavadoc = tasks.named<DokkaTask>("dokkaHtml")
     dependsOn(dokkaJavadoc)
     archiveClassifier.set("javadoc")
     from(dokkaJavadoc.get().outputDirectory)
