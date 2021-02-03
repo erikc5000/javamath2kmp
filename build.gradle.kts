@@ -94,10 +94,6 @@ val javadocJar by tasks.registering(Jar::class) {
     from(dokkaJavadoc.get().outputDirectory)
 }
 
-val emptySourcesJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("sources")
-}
-
 signing {
     val signingKey: String? by project
     val signingPassword: String? by project
@@ -132,10 +128,6 @@ publishing {
 
     publications.withType<MavenPublication>().configureEach {
         artifact(javadocJar.get())
-
-        if (name == "kotlinMultiplatform") {
-            artifact(emptySourcesJar.get())
-        }
 
         pom {
             name.set("JavaMath2KMP")
