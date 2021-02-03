@@ -33,6 +33,7 @@ kotlin {
             macosX64(),
             watchosArm64(),
             watchosX86(),
+            watchosX64(),
             tvosArm64(),
             tvosX64(),
             mingwX64(),
