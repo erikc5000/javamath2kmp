@@ -12,6 +12,7 @@ plugins {
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 val ideaActive get() = System.getProperty("idea.active") == "true"
