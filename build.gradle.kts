@@ -24,7 +24,7 @@ kotlin {
         listOf(mingwX64("nativeJs"))
     } else {
         listOf(
-            js {
+            js(BOTH) {
                 nodejs()
                 browser()
             },
