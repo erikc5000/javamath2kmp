@@ -1,6 +1,5 @@
 **/.idea/*
-!/.idea/codeStyleSettings.xml
-!/.idea/codeStyles
+!/.idea/codeStyles/
 .gradle/
 build/
 *.iml
