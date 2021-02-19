@@ -159,6 +159,7 @@ publishing {
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
         jvmTarget = "1.8"
+        useIR = true
     }
 }
 
