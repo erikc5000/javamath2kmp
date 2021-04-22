@@ -5,14 +5,13 @@ import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
     kotlin("multiplatform") version "1.4.30"
-    id("org.jetbrains.dokka") version "1.4.20"
+    id("org.jetbrains.dokka") version "1.4.32"
     `maven-publish`
     signing
 }
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 val ideaActive get() = System.getProperty("idea.active") == "true"
