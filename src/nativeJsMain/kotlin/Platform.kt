@@ -1,30 +1,15 @@
 package dev.erikchristensen.javamath2kmp
 
-actual infix fun Long.floorMod(other: Long): Long = (this % other + other) % other
-actual infix fun Int.floorMod(other: Int): Int = (this % other + other) % other
-actual infix fun Long.floorMod(other: Int): Int = (this floorMod other.toLong()).toInt()
+import kotlin.mod as kotlinMod
+import kotlin.floorDiv as kotlinFloorDiv
 
-actual infix fun Long.floorDiv(other: Long): Long {
-    val result = this / other
+actual infix fun Long.floorMod(other: Long): Long = kotlinMod(other)
+actual infix fun Int.floorMod(other: Int): Int = kotlinMod(other)
+actual infix fun Long.floorMod(other: Int): Int = kotlinMod(other)
 
-    return if (this xor other < 0 && result * other != this) {
-        result - 1
-    } else {
-        result
-    }
-}
-
-actual infix fun Int.floorDiv(other: Int): Int {
-    val result = this / other
-
-    return if (this xor other < 0 && result * other != this) {
-        result - 1
-    } else {
-        result
-    }
-}
-
-actual infix fun Long.floorDiv(other: Int): Long = this floorDiv other.toLong()
+actual infix fun Long.floorDiv(other: Long): Long = kotlinFloorDiv(other)
+actual infix fun Int.floorDiv(other: Int): Int = kotlinFloorDiv(other)
+actual infix fun Long.floorDiv(other: Int): Long = kotlinFloorDiv(other)
 
 actual infix fun Long.plusExact(other: Long): Long {
     val result = this + other

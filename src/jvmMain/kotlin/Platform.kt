@@ -1,3 +1,6 @@
+@file:JvmMultifileClass
+@file:JvmName("MathKt")
+
 package dev.erikchristensen.javamath2kmp
 
 actual infix fun Long.floorMod(other: Long): Long = Math.floorMod(this, other)
