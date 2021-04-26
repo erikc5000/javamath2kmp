@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    kotlin("multiplatform") version "1.4.30"
+    kotlin("multiplatform") version "1.5.0-RC"
     id("org.jetbrains.dokka") version "1.4.32"
     `maven-publish`
     signing
@@ -52,15 +52,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
-            }
-        }
-
-        val jvmTest by getting {
-            dependencies {
                 implementation(kotlin("test"))
-                implementation(kotlin("test-junit"))
             }
         }
 
@@ -75,12 +67,6 @@ kotlin {
                 dependsOn(commonTest)
             }
 
-            val jsTest by getting {
-                dependencies {
-                    implementation(kotlin("test-js"))
-                }
-            }
-
             configure(otherTargets) {
                 compilations["main"].defaultSourceSet.dependsOn(nativeJsMain)
                 compilations["test"].defaultSourceSet.dependsOn(nativeJsTest)
@@ -90,10 +76,10 @@ kotlin {
 }
 
 val javadocJar by tasks.registering(Jar::class) {
-    val dokkaJavadoc = tasks.named<DokkaTask>("dokkaHtml")
-    dependsOn(dokkaJavadoc)
+    val dokkaHtml = tasks.named<DokkaTask>("dokkaHtml")
+    dependsOn(dokkaHtml)
     archiveClassifier.set("javadoc")
-    from(dokkaJavadoc.get().outputDirectory)
+    from(dokkaHtml.get().outputDirectory)
 }
 
 signing {
@@ -159,7 +145,6 @@ publishing {
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
         jvmTarget = "1.8"
-        useIR = true
     }
 }
 

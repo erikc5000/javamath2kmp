@@ -1,4 +1,10 @@
+@file:JvmMultifileClass
+@file:JvmName("MathKt")
+
 package dev.erikchristensen.javamath2kmp
+
+import kotlin.jvm.JvmMultifileClass
+import kotlin.jvm.JvmName
 
 expect infix fun Long.floorMod(other: Long): Long
 expect infix fun Int.floorMod(other: Int): Int
