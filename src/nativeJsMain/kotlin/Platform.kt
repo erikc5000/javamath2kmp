@@ -5,10 +5,12 @@ import kotlin.floorDiv as kotlinFloorDiv
 
 actual infix fun Long.floorMod(other: Long): Long = kotlinMod(other)
 actual infix fun Int.floorMod(other: Int): Int = kotlinMod(other)
+actual infix fun Int.floorMod(other: Long): Long = kotlinMod(other)
 actual infix fun Long.floorMod(other: Int): Int = kotlinMod(other)
 
 actual infix fun Long.floorDiv(other: Long): Long = kotlinFloorDiv(other)
 actual infix fun Int.floorDiv(other: Int): Int = kotlinFloorDiv(other)
+actual infix fun Int.floorDiv(other: Long): Long = kotlinFloorDiv(other)
 actual infix fun Long.floorDiv(other: Int): Long = kotlinFloorDiv(other)
 
 actual infix fun Long.plusExact(other: Long): Long {
@@ -80,8 +82,6 @@ actual infix fun Int.timesExact(other: Int): Int {
 
     return total.toInt()
 }
-
-actual infix fun Long.timesExact(other: Int): Long = this timesExact other.toLong()
 
 actual fun Int.negateExact(): Int {
     if (this == Int.MIN_VALUE) {
