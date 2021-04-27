@@ -105,8 +105,34 @@ actual fun Long.toIntExact(): Int {
     return toInt()
 }
 
-actual fun Int.incExact(): Int = this plusExact 1
-actual fun Long.incExact(): Long = this plusExact 1
+actual fun Int.incExact(): Int {
+    if (this == Int.MAX_VALUE) {
+        throw ArithmeticException("'$this' can't be incremented without overflow")
+    }
 
-actual fun Int.decExact(): Int = this minusExact 1
-actual fun Long.decExact(): Long = this minusExact 1
+    return inc()
+}
+
+actual fun Long.incExact(): Long {
+    if (this == Long.MAX_VALUE) {
+        throw ArithmeticException("'$this' can't be incremented without overflow")
+    }
+
+    return inc()
+}
+
+actual fun Int.decExact(): Int {
+    if (this == Int.MIN_VALUE) {
+        throw ArithmeticException("'$this' can't be decremented without overflow")
+    }
+
+    return dec()
+}
+
+actual fun Long.decExact(): Long {
+    if (this == Long.MIN_VALUE) {
+        throw ArithmeticException("'$this' can't be decremented without overflow")
+    }
+
+    return dec()
+}
