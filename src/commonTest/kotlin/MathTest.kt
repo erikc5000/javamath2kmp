@@ -21,6 +21,13 @@ class MathTest {
     }
 
     @Test
+    fun floorMod_IntLong() {
+        assertEquals(1L, 4 floorMod 3L)
+        assertEquals(2L, -4 floorMod 3L)
+        assertEquals(-1L, -4 floorMod -3L)
+    }
+
+    @Test
     fun floorMod_LongInt() {
         assertEquals(1, 4L floorMod 3)
         assertEquals(2, -4L floorMod 3)
@@ -39,6 +46,13 @@ class MathTest {
         todo { assertEquals(Long.MIN_VALUE, Long.MIN_VALUE floorDiv -1L) } // Hangs on mingw
         assertEquals(1L, 4L floorDiv 3L)
         assertEquals(-2L, -4L floorDiv 3L)
+    }
+
+    @Test
+    fun floorDiv_IntLong() {
+        todo { assertEquals(Int.MIN_VALUE.toLong(), Int.MIN_VALUE floorDiv -1L) } // Hangs on mingw
+        assertEquals(1L, 4 floorDiv 3L)
+        assertEquals(-2L, -4 floorDiv 3L)
     }
 
     @Test
@@ -168,6 +182,7 @@ class MathTest {
         assertFailsWith<ArithmeticException> { Long.MIN_VALUE timesExact Long.MIN_VALUE }
         assertFailsWith<ArithmeticException> { Long.MIN_VALUE timesExact Long.MAX_VALUE }
         assertFailsWith<ArithmeticException> { Long.MIN_VALUE timesExact -1 }
+        assertFailsWith<ArithmeticException> { -1 timesExact Long.MIN_VALUE }
     }
 
     @Test
@@ -176,6 +191,7 @@ class MathTest {
         assertEquals(Long.MAX_VALUE - 1, Long.MAX_VALUE / 2 timesExact 2)
         assertEquals(Long.MIN_VALUE, Long.MIN_VALUE timesExact 1)
         assertEquals(Long.MIN_VALUE, Long.MIN_VALUE / 2 timesExact 2)
+        assertEquals(Int.MIN_VALUE.toLong(), Int.MIN_VALUE / 2 timesExact 2L)
     }
 
     @Test

@@ -19,6 +19,11 @@ expect infix fun Int.floorMod(other: Int): Int
 /**
  * Returns the floor modulus of this value and another value.
  */
+expect infix fun Int.floorMod(other: Long): Long
+
+/**
+ * Returns the floor modulus of this value and another value.
+ */
 expect infix fun Long.floorMod(other: Int): Int
 
 /**
@@ -30,6 +35,11 @@ expect infix fun Long.floorDiv(other: Long): Long
  * Returns the floor division of this value and another value.
  */
 expect infix fun Int.floorDiv(other: Int): Int
+
+/**
+ * Returns the floor division of this value and another value.
+ */
+expect infix fun Int.floorDiv(other: Long): Long
 
 /**
  * Returns the floor division of this value and another value.
@@ -71,12 +81,6 @@ expect infix fun Long.timesExact(other: Long): Long
  * @throws ArithmeticException if overflow occurs
  */
 expect infix fun Int.timesExact(other: Int): Int
-
-/**
- * Returns the product of this value and another value, throwing an exception if overflow occurs.
- * @throws ArithmeticException if overflow occurs
- */
-expect infix fun Long.timesExact(other: Int): Long
 
 /**
  * Returns the negation of this value, throwing an exception if overflow occurs.

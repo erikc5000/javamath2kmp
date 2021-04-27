@@ -29,3 +29,15 @@ infix fun Int.minusExact(other: Long): Long = this.toLong() minusExact other
  * @throws ArithmeticException if overflow occurs
  */
 infix fun Long.minusExact(other: Int): Long = this minusExact other.toLong()
+
+/**
+ * Returns the product of this value and another value, throwing an exception if overflow occurs.
+ * @throws ArithmeticException if overflow occurs
+ */
+infix fun Long.timesExact(other: Int): Long = this timesExact other.toLong()
+
+/**
+ * Returns the product of this value and another value, throwing an exception if overflow occurs.
+ * @throws ArithmeticException if overflow occurs
+ */
+infix fun Int.timesExact(other: Long): Long = this.toLong() timesExact other
