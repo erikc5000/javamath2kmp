@@ -8,6 +8,7 @@ plugins {
     id("org.jetbrains.dokka") version "1.4.32"
     `maven-publish`
     signing
+    jacoco
 }
 
 repositories {
@@ -154,4 +155,17 @@ tasks.withType(AbstractTestTask::class).configureEach {
         exceptionFormat = TestExceptionFormat.FULL
         showStackTraces = true
     }
+}
+
+tasks.register<JacocoReport>("testCoverage") {
+    dependsOn(tasks.named("jvmTest"))
+
+    classDirectories.setFrom(
+        fileTree("${buildDir}/classes/kotlin/jvm/") {
+            exclude("**/*Test*.*")
+        }
+    )
+
+    sourceDirectories.setFrom(kotlin.sourceSets["commonMain"].kotlin.sourceDirectories)
+    executionData.setFrom("${buildDir}/jacoco/jvmTest.exec")
 }
