@@ -49,59 +49,116 @@ class MathTest {
     }
 
     @Test
-    fun plusExact_throwsWhenAddingLongsCausesOverflow() {
-        assertFailsWith<ArithmeticException> { Long.MAX_VALUE plusExact 1 }
-        assertFailsWith<ArithmeticException> { Long.MAX_VALUE plusExact Long.MAX_VALUE }
-        assertFailsWith<ArithmeticException> { Long.MIN_VALUE plusExact (-1) }
-        assertFailsWith<ArithmeticException> { Long.MIN_VALUE plusExact Long.MIN_VALUE }
-    }
-
-    @Test
-    fun plusExact_addsLongsWhenResultFits() {
-        assertEquals(Long.MAX_VALUE, Long.MAX_VALUE - 1 plusExact 1)
-        assertEquals(Long.MIN_VALUE, Long.MIN_VALUE + 1 plusExact (-1))
-    }
-
-    @Test
-    fun plusExact_throwsWhenAddingIntsCausesOverflow() {
+    fun plusExact_IntInt_throwsOnOverflow() {
         assertFailsWith<ArithmeticException> { Int.MAX_VALUE plusExact 1 }
         assertFailsWith<ArithmeticException> { Int.MAX_VALUE plusExact Int.MAX_VALUE }
-        assertFailsWith<ArithmeticException> { Int.MIN_VALUE plusExact (-1) }
+        assertFailsWith<ArithmeticException> { Int.MIN_VALUE plusExact -1 }
         assertFailsWith<ArithmeticException> { Int.MIN_VALUE plusExact Int.MIN_VALUE }
     }
 
     @Test
-    fun plusExact_addsIntsWhenResultFits() {
+    fun plusExact_IntInt_addsWhenResultFits() {
         assertEquals(Int.MAX_VALUE, Int.MAX_VALUE - 1 plusExact 1)
-        assertEquals(Int.MIN_VALUE, Int.MIN_VALUE + 1 plusExact (-1))
+        assertEquals(Int.MIN_VALUE, Int.MIN_VALUE + 1 plusExact -1)
     }
 
     @Test
-    fun minusExact_throwsWhenSubtractingLongsCausesOverflow() {
-        assertFailsWith<ArithmeticException> { Long.MIN_VALUE minusExact 1 }
-        assertFailsWith<ArithmeticException> { Long.MIN_VALUE minusExact Long.MAX_VALUE }
-        assertFailsWith<ArithmeticException> { Long.MAX_VALUE minusExact (-1) }
-        assertFailsWith<ArithmeticException> { Long.MAX_VALUE minusExact Long.MIN_VALUE }
+    fun plusExact_IntLong_throwsOnOverflow() {
+        assertFailsWith<ArithmeticException> { 1 plusExact Long.MAX_VALUE }
+        assertFailsWith<ArithmeticException> { Int.MAX_VALUE plusExact Long.MAX_VALUE }
+        assertFailsWith<ArithmeticException> { -1 plusExact Long.MIN_VALUE }
+        assertFailsWith<ArithmeticException> { Int.MIN_VALUE plusExact Long.MIN_VALUE }
     }
 
     @Test
-    fun minusExact_subtractsLongsWhenResultFits() {
-        assertEquals(Long.MIN_VALUE, Long.MIN_VALUE + 1 minusExact 1)
-        assertEquals(Long.MAX_VALUE, Long.MAX_VALUE - 1 minusExact (-1))
+    fun plusExact_IntLong_addsWhenResultFits() {
+        assertEquals(Int.MAX_VALUE.toLong(), Int.MAX_VALUE - 1 plusExact 1L)
+        assertEquals(Int.MIN_VALUE.toLong(), Int.MIN_VALUE + 1 plusExact -1L)
     }
 
     @Test
-    fun minusExact_throwsWhenSubtractingIntsCausesOverflow() {
+    fun plusExact_LongInt_throwsOnOverflow() {
+        assertFailsWith<ArithmeticException> { Long.MAX_VALUE plusExact 1 }
+        assertFailsWith<ArithmeticException> { Long.MAX_VALUE plusExact Int.MAX_VALUE }
+        assertFailsWith<ArithmeticException> { Long.MIN_VALUE plusExact -1 }
+        assertFailsWith<ArithmeticException> { Long.MIN_VALUE plusExact Int.MIN_VALUE }
+    }
+
+    @Test
+    fun plusExact_LongInt_addsWhenResultFits() {
+        assertEquals(Long.MAX_VALUE, Long.MAX_VALUE - 1 plusExact 1)
+        assertEquals(Long.MIN_VALUE, Long.MIN_VALUE + 1 plusExact -1)
+    }
+
+    @Test
+    fun plusExact_LongLong_throwsOnOverflow() {
+        assertFailsWith<ArithmeticException> { Long.MAX_VALUE plusExact 1L }
+        assertFailsWith<ArithmeticException> { 1L plusExact Long.MAX_VALUE }
+        assertFailsWith<ArithmeticException> { Long.MIN_VALUE plusExact -1L }
+        assertFailsWith<ArithmeticException> { -1L plusExact Long.MIN_VALUE }
+        assertFailsWith<ArithmeticException> { Long.MAX_VALUE plusExact Long.MAX_VALUE }
+        assertFailsWith<ArithmeticException> { Long.MIN_VALUE plusExact Long.MIN_VALUE }
+    }
+
+    @Test
+    fun plusExact_LongLong_addsWhenResultFits() {
+        assertEquals(Long.MAX_VALUE, Long.MAX_VALUE - 1 plusExact 1L)
+        assertEquals(Long.MIN_VALUE, Long.MIN_VALUE + 1 plusExact -1L)
+    }
+
+    @Test
+    fun minusExact_IntInt_throwsOnOverflow() {
         assertFailsWith<ArithmeticException> { Int.MIN_VALUE minusExact 1 }
         assertFailsWith<ArithmeticException> { Int.MIN_VALUE minusExact Int.MAX_VALUE }
-        assertFailsWith<ArithmeticException> { Int.MAX_VALUE minusExact (-1) }
+        assertFailsWith<ArithmeticException> { Int.MAX_VALUE minusExact -1 }
         assertFailsWith<ArithmeticException> { Int.MAX_VALUE minusExact Int.MIN_VALUE }
     }
 
     @Test
-    fun minusExact_subtractsIntsWhenResultFits() {
+    fun minusExact_IntInt_subtractsWhenResultFits() {
         assertEquals(Int.MIN_VALUE, Int.MIN_VALUE + 1 minusExact 1)
-        assertEquals(Int.MAX_VALUE, Int.MAX_VALUE - 1 minusExact (-1))
+        assertEquals(Int.MAX_VALUE, Int.MAX_VALUE - 1 minusExact -1)
+    }
+
+    @Test
+    fun minusExact_IntLong_throwsOnOverflow() {
+        assertFailsWith<ArithmeticException> { 0 minusExact Long.MIN_VALUE }
+        assertFailsWith<ArithmeticException> { Long.MIN_VALUE minusExact Int.MAX_VALUE }
+        assertFailsWith<ArithmeticException> { Long.MAX_VALUE minusExact -1 }
+        assertFailsWith<ArithmeticException> { Long.MAX_VALUE minusExact Int.MIN_VALUE }
+    }
+
+    @Test
+    fun minusExact_IntLong_subtractsWhenResultFits() {
+        assertEquals(Long.MIN_VALUE, -1 minusExact Long.MAX_VALUE)
+    }
+
+    @Test
+    fun minusExact_LongInt_throwsOnOverflow() {
+        assertFailsWith<ArithmeticException> { Long.MIN_VALUE minusExact 1 }
+        assertFailsWith<ArithmeticException> { Long.MIN_VALUE minusExact Int.MAX_VALUE }
+        assertFailsWith<ArithmeticException> { Long.MAX_VALUE minusExact -1 }
+        assertFailsWith<ArithmeticException> { Long.MAX_VALUE minusExact Int.MIN_VALUE }
+    }
+
+    @Test
+    fun minusExact_LongInt_subtractsWhenResultFits() {
+        assertEquals(Long.MIN_VALUE, Long.MIN_VALUE + 1 minusExact 1)
+        assertEquals(Long.MAX_VALUE, Long.MAX_VALUE - 1 minusExact -1)
+    }
+
+    @Test
+    fun minusExact_LongLong_throwsOnOverflow() {
+        assertFailsWith<ArithmeticException> { Long.MIN_VALUE minusExact 1L }
+        assertFailsWith<ArithmeticException> { Long.MIN_VALUE minusExact Long.MAX_VALUE }
+        assertFailsWith<ArithmeticException> { Long.MAX_VALUE minusExact -1L }
+        assertFailsWith<ArithmeticException> { Long.MAX_VALUE minusExact Long.MIN_VALUE }
+    }
+
+    @Test
+    fun minusExact_LongLong_subtractsWhenResultFits() {
+        assertEquals(Long.MIN_VALUE, Long.MIN_VALUE + 1 minusExact 1L)
+        assertEquals(Long.MAX_VALUE, Long.MAX_VALUE - 1 minusExact -1L)
     }
 
     @Test
@@ -110,7 +167,7 @@ class MathTest {
         assertFailsWith<ArithmeticException> { Long.MAX_VALUE timesExact Long.MAX_VALUE }
         assertFailsWith<ArithmeticException> { Long.MIN_VALUE timesExact Long.MIN_VALUE }
         assertFailsWith<ArithmeticException> { Long.MIN_VALUE timesExact Long.MAX_VALUE }
-        assertFailsWith<ArithmeticException> { Long.MIN_VALUE timesExact (-1) }
+        assertFailsWith<ArithmeticException> { Long.MIN_VALUE timesExact -1 }
     }
 
     @Test
@@ -127,7 +184,7 @@ class MathTest {
         assertFailsWith<ArithmeticException> { Int.MAX_VALUE timesExact Int.MAX_VALUE }
         assertFailsWith<ArithmeticException> { Int.MIN_VALUE timesExact Int.MIN_VALUE }
         assertFailsWith<ArithmeticException> { Int.MIN_VALUE timesExact Int.MAX_VALUE }
-        assertFailsWith<ArithmeticException> { Int.MIN_VALUE timesExact (-1) }
+        assertFailsWith<ArithmeticException> { Int.MIN_VALUE timesExact -1 }
     }
 
     @Test
