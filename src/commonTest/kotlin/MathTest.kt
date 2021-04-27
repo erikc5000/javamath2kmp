@@ -290,4 +290,30 @@ class MathTest {
         assertEquals(Long.MIN_VALUE, (Long.MIN_VALUE + 1).decExact())
         assertEquals(-1L, 0L.decExact())
     }
+
+    @Test
+    fun absExact_Int_throwsWhenResultCausesOverflow() {
+        assertFailsWith<ArithmeticException> { absExact(Int.MIN_VALUE) }
+    }
+
+    @Test
+    fun absExact_Int_succeedsWhenResultFits() {
+        assertEquals(0, absExact(0))
+        assertEquals(1, absExact(1))
+        assertEquals(1, absExact(-1))
+        assertEquals(Int.MAX_VALUE, absExact(Int.MIN_VALUE + 1))
+    }
+
+    @Test
+    fun absExact_Long_throwsWhenResultCausesOverflow() {
+        assertFailsWith<ArithmeticException> { absExact(Long.MIN_VALUE) }
+    }
+
+    @Test
+    fun absExact_Long_succeedsWhenResultFits() {
+        assertEquals(0L, absExact(0L))
+        assertEquals(1L, absExact(1L))
+        assertEquals(1L, absExact(-1L))
+        assertEquals(Long.MAX_VALUE, absExact(Long.MIN_VALUE + 1))
+    }
 }
