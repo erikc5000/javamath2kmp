@@ -16,40 +16,36 @@ repositories {
     maven(url = "https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven")
 }
 
-val ideaActive get() = System.getProperty("idea.active") == "true"
-
 kotlin {
     jvm()
 
-    val otherTargets = if (ideaActive) {
-        listOf(mingwX64("nativeJs"))
-    } else {
-        listOf(
-            js(BOTH) {
-                nodejs()
-                browser()
-            },
-            iosArm32(),
-            iosArm64(),
-            iosX64(),
-            macosX64(),
-            watchosArm64(),
-            watchosX86(),
-            watchosX64(),
-            tvosArm64(),
-            tvosX64(),
-            mingwX64(),
-            mingwX86(),
-            linuxArm64(),
-            linuxArm32Hfp(),
-            linuxX64()
-        )
-    }
+    val otherTargets = listOf(
+        js(BOTH) {
+            nodejs()
+            browser()
+        },
+        iosArm32(),
+        iosArm64(),
+        iosX64(),
+        macosX64(),
+        watchosArm64(),
+        watchosX86(),
+        watchosX64(),
+        tvosArm64(),
+        tvosX64(),
+        mingwX64(),
+        mingwX86(),
+        linuxArm64(),
+        linuxArm32Hfp(),
+        linuxX64()
+    )
 
     sourceSets {
         all {
             languageSettings.progressiveMode = true
         }
+
+        val commonMain by getting
 
         val commonTest by getting {
             dependencies {
@@ -57,21 +53,17 @@ kotlin {
             }
         }
 
-        if (!ideaActive) {
-            val commonMain by getting
+        val nativeJsMain by creating {
+            dependsOn(commonMain)
+        }
 
-            val nativeJsMain by creating {
-                dependsOn(commonMain)
-            }
+        val nativeJsTest by creating {
+            dependsOn(commonTest)
+        }
 
-            val nativeJsTest by creating {
-                dependsOn(commonTest)
-            }
-
-            configure(otherTargets) {
-                compilations["main"].defaultSourceSet.dependsOn(nativeJsMain)
-                compilations["test"].defaultSourceSet.dependsOn(nativeJsTest)
-            }
+        configure(otherTargets) {
+            compilations["main"].defaultSourceSet.dependsOn(nativeJsMain)
+            compilations["test"].defaultSourceSet.dependsOn(nativeJsTest)
         }
     }
 }
