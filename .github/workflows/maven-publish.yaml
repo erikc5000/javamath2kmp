@@ -34,7 +34,7 @@ jobs:
             ${{ runner.os }}-konan-
 
       - name: Publish MacOS Artifacts
-        if: matrix.os == 'macos-latest'
+        if: matrix.os == 'macos-11'
         run: ./gradlew publishAllPublicationsToMavenRepository
 
       - name: Publish Windows Artifacts
