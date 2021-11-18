@@ -6,9 +6,9 @@ import org.jetbrains.dokka.gradle.DokkaTask
 plugins {
     kotlin("multiplatform") version "1.6.0"
     id("org.jetbrains.dokka") version "1.5.31"
+    id("org.jetbrains.kotlinx.kover") version "0.4.2"
     `maven-publish`
     signing
-    jacoco
 }
 
 repositories {
@@ -150,17 +150,4 @@ tasks.withType(AbstractTestTask::class).configureEach {
         exceptionFormat = TestExceptionFormat.FULL
         showStackTraces = true
     }
-}
-
-tasks.register<JacocoReport>("testCoverage") {
-    dependsOn(tasks.named("jvmTest"))
-
-    classDirectories.setFrom(
-        fileTree("${buildDir}/classes/kotlin/jvm/") {
-            exclude("**/*Test*.*")
-        }
-    )
-
-    sourceDirectories.setFrom(kotlin.sourceSets["commonMain"].kotlin.sourceDirectories)
-    executionData.setFrom("${buildDir}/jacoco/jvmTest.exec")
 }
