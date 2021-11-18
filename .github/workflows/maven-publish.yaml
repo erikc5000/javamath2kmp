@@ -7,10 +7,7 @@ on:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        os: [ macos-11, windows-latest ]
-    runs-on: ${{matrix.os}}
+    runs-on: macos-11
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -33,13 +30,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-konan-
 
-      - name: Publish MacOS Artifacts
-        if: matrix.os == 'macos-11'
+      - name: Publish
         run: ./gradlew publishAllPublicationsToMavenRepository
-
-      - name: Publish Windows Artifacts
-        if: matrix.os == 'windows-latest'
-        run: ./gradlew publishMingwX64PublicationToMavenRepository publishMingwX86PublicationToMavenRepository
 
 env:
   ORG_GRADLE_PROJECT_repositoryUsername: ${{ secrets.ORG_GRADLE_PROJECT_repositoryUsername }}
