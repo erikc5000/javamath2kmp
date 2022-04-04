@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    kotlin("multiplatform") version "1.6.10"
+    kotlin("multiplatform") version "1.6.20"
     id("org.jetbrains.dokka") version "1.6.0"
     id("org.jetbrains.kotlinx.kover") version "0.4.4"
     `maven-publish`
