@@ -6,7 +6,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 plugins {
     kotlin("multiplatform") version "1.6.20"
     id("org.jetbrains.dokka") version "1.6.0"
-    id("org.jetbrains.kotlinx.kover") version "0.4.4"
+    id("org.jetbrains.kotlinx.kover") version "0.5.0"
     `maven-publish`
     signing
 }
