@@ -19,5 +19,5 @@ Floor division and floor modulus were added to the standard library in 1.5, but 
 #### Gradle Setup
 
 ```kotlin
-implementation("dev.erikchristensen.javamath2kmp:javamath2kmp:0.4.5")
+implementation("dev.erikchristensen.javamath2kmp:javamath2kmp:0.4.6")
 ```
