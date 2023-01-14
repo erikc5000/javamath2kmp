@@ -83,6 +83,8 @@ actual infix fun Int.timesExact(other: Int): Int {
     return total.toInt()
 }
 
+actual infix fun Long.timesExact(other: Int): Long = this timesExact other.toLong()
+
 actual fun Int.negateExact(): Int {
     if (this == Int.MIN_VALUE) {
         throw ArithmeticException("'$this' can't be negated without overflow")

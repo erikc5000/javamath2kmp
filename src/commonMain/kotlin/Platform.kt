@@ -83,6 +83,12 @@ expect infix fun Long.timesExact(other: Long): Long
 expect infix fun Int.timesExact(other: Int): Int
 
 /**
+ * Returns the product of this value and another value, throwing an exception if overflow occurs.
+ * @throws ArithmeticException if overflow occurs
+ */
+expect infix fun Long.timesExact(other: Int): Long
+
+/**
  * Returns the negation of this value, throwing an exception if overflow occurs.
  * @throws ArithmeticException if overflow occurs
  */

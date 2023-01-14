@@ -35,13 +35,7 @@ infix fun Long.minusExact(other: Int): Long = this minusExact other.toLong()
  * Returns the product of this value and another value, throwing an exception if overflow occurs.
  * @throws ArithmeticException if overflow occurs
  */
-infix fun Long.timesExact(other: Int): Long = this timesExact other.toLong()
-
-/**
- * Returns the product of this value and another value, throwing an exception if overflow occurs.
- * @throws ArithmeticException if overflow occurs
- */
-infix fun Int.timesExact(other: Long): Long = this.toLong() timesExact other
+infix fun Int.timesExact(other: Long): Long = other timesExact this
 
 /**
  * Returns the absolute value of a number, throwing an exception if overflow occurs.
