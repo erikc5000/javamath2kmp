@@ -20,7 +20,7 @@ kotlin {
     jvm()
 
     val otherTargets = listOf(
-        js(BOTH) {
+        js(IR) {
             nodejs()
             browser()
         },
