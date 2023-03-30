@@ -5,7 +5,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    kotlin("multiplatform") version "1.8.10"
+    kotlin("multiplatform") version "1.8.20"
     id("org.jetbrains.dokka") version "1.8.10"
     id("org.jetbrains.kotlinx.kover") version "0.6.1"
     `maven-publish`
