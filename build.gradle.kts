@@ -24,14 +24,12 @@ kotlin {
             nodejs()
             browser()
         },
-        iosArm32(),
         iosArm64(),
         iosX64(),
         iosSimulatorArm64(),
         macosX64(),
         macosArm64(),
         watchosArm64(),
-        watchosX86(),
         watchosX64(),
         watchosSimulatorArm64(),
         watchosDeviceArm64(),
@@ -39,10 +37,12 @@ kotlin {
         tvosX64(),
         tvosSimulatorArm64(),
         mingwX64(),
-        mingwX86(),
         linuxArm64(),
-        linuxArm32Hfp(),
-        linuxX64()
+        linuxX64(),
+        androidNativeArm32(),
+        androidNativeArm64(),
+        androidNativeX86(),
+        androidNativeX64()
     )
 
     sourceSets {
