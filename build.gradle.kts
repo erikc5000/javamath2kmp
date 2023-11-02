@@ -1,8 +1,8 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     kotlin("multiplatform") version "1.9.20"
@@ -76,7 +76,7 @@ kotlin {
 val javadocJar by tasks.registering(Jar::class) {
     val dokkaHtml = tasks.named<DokkaTask>("dokkaHtml")
     dependsOn(dokkaHtml)
-    archiveClassifier.set("javadoc")
+    archiveClassifier = "javadoc"
     from(dokkaHtml.get().outputDirectory)
 }
 
@@ -116,37 +116,37 @@ publishing {
         artifact(javadocJar.get())
 
         pom {
-            name.set("JavaMath2KMP")
-            description.set("A Kotlin Multiplatform port of Java math functions not included in the standard library")
-            url.set("https://github.com/erikc5000/javamath2kmp")
+            name = "JavaMath2KMP"
+            description = "A Kotlin Multiplatform port of Java math functions not included in the standard library"
+            url = "https://github.com/erikc5000/javamath2kmp"
             licenses {
                 license {
-                    name.set("The Apache License, Version 2.0")
-                    url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                    distribution.set("repo")
+                    name = "The Apache License, Version 2.0"
+                    url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                    distribution = "repo"
                 }
             }
             developers {
                 developer {
-                    id.set("erikc5000")
-                    name.set("Erik Christensen")
+                    id = "erikc5000"
+                    name = "Erik Christensen"
                 }
             }
             scm {
-                connection.set("scm:git:https://github.com/erikc5000/javamath2kmp.git")
-                url.set("https://github.com/erikc5000/javamath2kmp")
+                connection = "scm:git:https://github.com/erikc5000/javamath2kmp.git"
+                url = "https://github.com/erikc5000/javamath2kmp"
             }
         }
     }
 }
 
-tasks.withType<KotlinCompile>().configureEach {
+tasks.withType<KotlinJvmCompile>().configureEach {
     compilerOptions {
         jvmTarget.set(JvmTarget.JVM_11)
     }
 }
 
-tasks.withType(AbstractTestTask::class).configureEach {
+tasks.withType<AbstractTestTask>().configureEach {
     testLogging {
         events = setOf(TestLogEvent.FAILED)
         exceptionFormat = TestExceptionFormat.FULL
