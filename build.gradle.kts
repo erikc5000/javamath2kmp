@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
-    kotlin("multiplatform") version "1.9.21"
+    kotlin("multiplatform") version "1.9.22"
     id("org.jetbrains.dokka") version "1.9.10"
     id("org.jetbrains.kotlinx.kover") version "0.7.5"
     `maven-publish`
