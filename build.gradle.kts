@@ -98,6 +98,20 @@ val isReleaseBuild get() = !version.toString().endsWith("SNAPSHOT")
 
 tasks.withType<Sign>().configureEach {
     onlyIf { isReleaseBuild }
+
+    // Workaround for https://youtrack.jetbrains.com/issue/KT-61313
+    val pubName = name.removePrefix("sign").removeSuffix("Publication")
+
+    // These tasks only exist for native targets, hence findByName() to avoid trying to find them for other targets
+
+    // Task ':linkDebugTest<platform>' uses this output of task ':sign<platform>Publication' without declaring an explicit or implicit dependency
+    tasks.findByName("linkDebugTest$pubName")?.let {
+        mustRunAfter(it)
+    }
+    // Task ':compileTestKotlin<platform>' uses this output of task ':sign<platform>Publication' without declaring an explicit or implicit dependency
+    tasks.findByName("compileTestKotlin$pubName")?.let {
+        mustRunAfter(it)
+    }
 }
 
 publishing {
