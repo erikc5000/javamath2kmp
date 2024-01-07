@@ -1,7 +1,10 @@
+@file:OptIn(ExperimentalWasmDsl::class)
+
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
@@ -42,7 +45,11 @@ kotlin {
         androidNativeArm32(),
         androidNativeArm64(),
         androidNativeX86(),
-        androidNativeX64()
+        androidNativeX64(),
+        wasmJs {
+            browser()
+        },
+        wasmWasi()
     )
 
     sourceSets {
