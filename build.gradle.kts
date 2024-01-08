@@ -147,6 +147,11 @@ publishing {
     }
 }
 
+tasks.withType<AbstractPublishToMaven>().configureEach {
+    val signingTasks = tasks.withType<Sign>()
+    mustRunAfter(signingTasks)
+}
+
 tasks.withType<KotlinJvmCompile>().configureEach {
     compilerOptions {
         jvmTarget.set(JvmTarget.JVM_11)
