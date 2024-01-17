@@ -23,7 +23,7 @@ jobs:
           cache: 'gradle'
 
       - name: Cache Konan
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.konan
           key: ${{ runner.os }}-konan-${{ hashFiles('build.gradle.kts') }}
